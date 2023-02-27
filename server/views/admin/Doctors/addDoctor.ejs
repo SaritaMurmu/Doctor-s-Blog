@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<%-include("../common/header.ejs")%>
+
+    <body>
+        <div class="wrapper">
+            <%-include("../common/navbar.ejs")%>
+            <%-include("../common/sidebar.ejs")%>
+
+            <div class="content-wrapper">
+
+                <div class="content-header">
+                    <div class="container-fluid">
+
+                        <div class="row mb-2 mt-5">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">
+                                    <%=dashboardtitle%>
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li class="breadcrumb-item active"> Doctor </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container mt-5">
+                        <h1 class="text-center mb-4"> Add New Doctor </h1>
+
+                        <% if (message.length > 0) {%> 
+                            <div class="alert alert-success">
+                                <%= message %>
+                            </div>
+                        <% } %>
+
+                        <form action="/admin/createDoctor" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label"> Choose Image </label>
+                                <input class="form-control" type="file" id="formFile" name="docImage" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputState">Department</label>
+                                <select id="inputState" class="form-control" name="department">
+                                    <option disabled selected>--- Select Department ---</option>
+                                    <% for(let data of displayDatas){ %>
+                                        <option value="<%= data.id %>"> 
+                                            <%= data.deptName %>
+                                        </option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label"> Doctor's Full Name </label>
+                                <input type="text" class="form-control" placeholder="Enter Doctor's Full Name" name="docName" required>
+                            </div>
+                          
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Skills</label>
+                                <input type="text" class="form-control" placeholder="Enter Skill" name="skill" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Expertise</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="sit amet consectetur" required />
+                                    <label class="form-check-label mr-5" for="defaultCheck1">
+                                       sit amet consectetur
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="Lorem ipsum" required />
+                                    <label class="form-check-label" for="defaultCheck1">
+                                      Lorem ipsum                                                                                           
+                                    </label>
+                                  </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success" > Submit </button>
+                        
+                        </form>
+
+                        <h1 class="text-center mt-5 mb-3">Qualification Details</h1>
+
+                        <form onsubmit="clean()" action="/admin/addMore" method="POST">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Year</label>
+                                <input type="text" id="year_field" class="form-control" placeholder="Enter Year" name="year" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="inputState">Qualification</label>
+                                <select id="inputState" class="form-control" name="qua">
+                                    <option disabled selected>--- Select Qualification ---</option>
+                                    <option>Harvard University</option>
+                                    <option> Stanford University</option>
+                                    <option> Yale University</option>
+                                    <option> John Hopkins University</option>
+                                    <option> Columbia University</option>
+                                    <option>University of Pennsylvania</option>
+                                    <option> University of California, Los Angeles (UCLA)</option>
+                                    <option>University of Washington</option>
+                                    <option>University of California, Berkeley</option>
+                                    <option>University of Michigan-Ann Arbor</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Qualification Description </label>
+                                <textarea id="des" type="text" class="form-control resize-disabled" placeholder="Enter Qualification Description" name="quaDescription"
+                                    required> </textarea>
+                            </div>
+                      <button onclick="clean()" type="submit" class="btn btn-success mb-5">save</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+            <%-include("../common/footer.ejs")%>
+        </div>
+     <%-include("../common/scripts.ejs")%>
+
+<script>
+
+function clean(params) {
+ 
+document.getElementById("year_field").value
+document.getElementById("inputState").value
+document.getElementById("des").value
+}
+</script>
+      
+</body>
+
+</html>

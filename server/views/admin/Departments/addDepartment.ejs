@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<%-include("../common/header.ejs")%>
+
+    <body>
+        <div class="wrapper">
+            <%-include("../common/navbar.ejs")%>
+            <%-include("../common/sidebar.ejs")%>
+            
+            <div>
+                <% if (message.length> 0) { %>
+                    <div class="alert alert-success">
+    
+                        <strong>
+                            <%= message %>
+                        </strong>
+                    </div>
+                    <% } %>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+
+                        <div class="row mb-2 mt-5">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">
+                                    <%=dashboardtitle%>
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="/admin"> Home </a></li>
+                                    <li class="breadcrumb-item active"> Dashboard </li>
+                                    <li class="breadcrumb-item active"> Department </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="container mt-5">
+                        <h1 class="text-center mb-4"> Add New Department </h1>
+
+                        <% if (message.length> 0) {%>
+                            <div class="alert alert-success">
+                                <%= message %>
+                            </div>
+                        <% } %>
+
+                        <form action="/admin/createDepartment" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label"> Choose Image </label>
+                                <input class="form-control" type="file" id="formFile"
+                                    name="deptImage" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">
+                                    Department Name </label>
+                                <input type="text" class="form-control"
+                                    placeholder="Enter Department Name" name="deptName"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">
+                                    Description </label>
+                                <textarea class="form-control resize-disabled1 resize-disabled" rows="3"
+                                    placeholder="Enter Description" name="deptDescription"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success"> Submit </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <%-include("../common/footer.ejs")%>
+        </div>
+        <%-include("../common/scripts.ejs")%>
+    </body>
+
+</html>

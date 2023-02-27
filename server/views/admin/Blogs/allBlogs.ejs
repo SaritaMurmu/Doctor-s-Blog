@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<%-include("../common/header.ejs")%>
+
+    <body>
+        <div class="wrapper">
+            <%-include("../common/navbar.ejs")%>
+            <%-include("../common/sidebar.ejs")%>
+
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+
+                        <div class="row mb-2 mt-5">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">
+                                    <%=dashboardtitle%>
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li class="breadcrumb-item active"> Blog </li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="row mb-2 m-auto">
+                    <div class="container mt-5">
+                        <a href="/admin/addBlog"> <button type="button" class="btn btn-success mb-3"> Add New Blog </button> </a>
+                        <table class="table table-dark table-striped text-center mb-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col"> # </th>
+                                    <th scope="col"> Image </th>
+                                    <th scope="col"> CategoryID </th>
+                                    <th scope="col"> Blog Title </th>
+                                    <th scope="col"> Date Uploaded </th>
+                                    <!-- <th colspan="2"> Action </th> -->
+                                    <th scope="col"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let c = 0 %>
+                                <% if(displaydata.length > 0) {%>
+                                    <% for(let blog of displaydata){ %>
+                                        <% const p = blog.id %>
+                                        <% const cat = blog.category %>
+                                        <% const categoryID = cat.toString() %>
+                                        <tr>
+                                            <!-- <td scope="row"> <%=p.substring(20, 24)%> </td> -->
+                                            <td scope="row"> <%= ++c %> </td>
+                                            <td> <img src="/blogUploads/<%= blog.blogImage %>" style="border-radius: 50%;" alt="" height="50" width="50"> </td>
+                                            <td> <%= categoryID.substring(20, 24) %> </td>
+                                            <td style="text-align: justify;"> <%= blog.blogTitle %> </td>
+                                            <td> <%= blog.createdAt %> </td>
+                                            <!-- <td> <a href="/admin/editBlog/<%=blog.id%>"> <button type="button" class="btn btn-outline-primary"> Edit </button> </a> </td> -->
+                                            <td> <a href="/admin/deleteBlog/<%=blog.id%>"> <button class="btn btn-outline-danger"> Delete </button> </a> </td>
+                                        </tr>
+                                <%}}else{%>
+                                <h1> No data found </h1>
+                                <% } %>
+                            </tbody>2
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <%-include("../common/footer.ejs")%>
+        </div>
+        <%-include("../common/scripts.ejs")%>
+    </body>
+
+</html>

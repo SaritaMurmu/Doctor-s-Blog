@@ -1,0 +1,5 @@
+# dependencies
+/node_modules
+
+# PORT + MONGO_URL
+.env
